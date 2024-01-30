@@ -1,0 +1,54 @@
+html, body {
+  background-color: rgb(233, 232, 232);
+  width: 100%;
+}
+
+input[type="file"]:focus {
+  outline: 0;
+}
+.box {
+  margin-top: 20px;
+}
+.file-upload_area {
+  margin-bottom: 20px;
+  position: relative;
+  .file-upload_input {
+    margin-left: 20px;
+    &::before {
+      background: #F9EA7F;
+      border-radius: 2px;
+      color: #555;
+      content: 'ファイルを選択';
+      font-size: 14px;
+      left: 0;
+      padding: 10px 12px;
+      position: absolute;
+      top: -8px;
+    }
+  }
+  input[type="file"]::-webkit-file-upload-button {
+    background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-color: transparent;
+    border: 0;
+    margin: 0 20px 0 0;
+  }
+}
+
+select {
+  position: relative;
+  width: 20vw;
+  height:100vh;
+  padding: 0 20px;
+  font-size: 20px
+}
+
+.box {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.graph_area {
+  position: relative;
+  width:  100vw;
+  height: 100vh;
+}
