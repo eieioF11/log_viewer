@@ -2,6 +2,7 @@ var reader;
 var header;
 function init() {
   var file = document.querySelector("#getfile");
+  // document.getElementById("columns").reset();
   file.onchange = function () {
     var fileList = file.files;
     reader = new FileReader();
@@ -34,37 +35,31 @@ function init() {
     };
   };
 }
+
 function sel() {
   // 選択されているvalueを取得
-  let options = document.getElementById("columns").options;
-  let columns_str = new Array();
   let select_columns = new Array();
   select_columns.push(true); // time_stamp
-  for (let option of options) {
-    // 各option要素の選択状態を判定
-    // true（選択状態）の場合、料理名を配列に格納
-    if (option.selected) {
-      columns_str.push(option.value);
+  for (let option of document.getElementById("columns").options) {
+    if (option.selected)
       select_columns.push(true);
-    } else select_columns.push(false);
+    else
+      select_columns.push(false);
   }
   let lines = reader.result.split("\n");
   var data = "";
-  for (let line of lines) {
-    cells = line.split(",");
+  lines.forEach((line) => {
     var i = 0;
-    for (let cell of cells) {
+    line.split(",").forEach((cell) => {
       if (select_columns[i]) data += cell + ",";
-      i++;
-    }
-    data = data.slice(0, data.length - 1);
-    data += "\n";
-  }
+      i=i+1;
+    });
+    data = data.slice(0, data.length - 1) + "\n";
+  });
   g = new Dygraph(document.getElementById("graph"), data, {
     showRoller: true,
     legend: "always", // 凡例常表示
   });
   // console.log(data);
   // console.log(select_columns);
-  // console.log(columns_str);
 }
