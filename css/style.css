@@ -1,6 +1,8 @@
 html, body {
   background-color: rgb(233, 232, 232);
   width: 100%;
+  font-family: Hannotate SC;
+  font-weight: bold;
 }
 
 input[type="file"]:focus {
@@ -15,7 +17,7 @@ input[type="file"]:focus {
   .file-upload_input {
     margin-left: 20px;
     &::before {
-      background: #F9EA7F;
+      background: #b9ff9c;
       border-radius: 2px;
       color: #555;
       content: 'ファイルを選択';
@@ -24,6 +26,7 @@ input[type="file"]:focus {
       padding: 10px 12px;
       position: absolute;
       top: -8px;
+      font-weight: bold;
     }
   }
   input[type="file"]::-webkit-file-upload-button {
@@ -37,9 +40,14 @@ input[type="file"]:focus {
 select {
   position: relative;
   width: 20vw;
-  height:100vh;
+  height:90vh;
   padding: 0 20px;
-  font-size: 20px
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  overflow: hidden;
+  color: rgb(0, 0, 0);
+  background-color: rgb(233, 232, 232);
 }
 
 .box {
@@ -50,5 +58,54 @@ select {
 .graph_area {
   position: relative;
   width:  100vw;
-  height: 100vh;
+  height: 90vh;
+}
+
+
+/* buttonタグのリセットCSS（不要な場合、セレクタごと削除してください） */
+button {
+  border: none;
+  color: inherit;
+  font-weight: bold;
+}
+
+/* ボタンのスタイル */
+.buttonUnderline {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  padding: 0 50px;
+  overflow: hidden;
+  font-size: 15px;
+  color: #222;
+  text-align: center;
+  overflow-wrap: anywhere;
+  background: transparent;
+}
+
+.buttonUnderline::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 5px;
+  content: "";
+  background-color: #6fa24a;
+  transform: scaleX(0);
+  transform-origin: right top;
+}
+
+@media (any-hover: hover) {
+  .buttonUnderline::after {
+    transition: transform 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .buttonUnderline:hover::after {
+    transition: transform 0.4s cubic-bezier(0.9, 0, 0, 1);
+    transform: scaleX(1);
+    transform-origin: left top;
+  }
 }

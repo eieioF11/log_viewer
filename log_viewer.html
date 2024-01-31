@@ -12,6 +12,10 @@
   <body onload="init();">
     <div class="file-upload_area">
       <input type="file" id="getfile" accept=".csv" class="file-upload_input" />
+      <div class="box">
+        <button class="buttonUnderline" onclick="load()">Reset</button>
+        <button class="buttonUnderline" onclick="set()">Set</button>
+      </div>
     </div>
     <div class="box">
       <select multiple id="columns" onclick="return sel();"></select>
