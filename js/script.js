@@ -17,8 +17,7 @@ function init() {
 
 function load() {
   var select = document.getElementById("columns");
-  if (typeof header !== 'undefined')
-  {
+  if (typeof header !== 'undefined') {
     header.forEach((element) => {
       if (element != "") {
         select.remove(element);
@@ -29,6 +28,9 @@ function load() {
   g = new Dygraph(document.getElementById("graph"), reader.result, {
     showRoller: true,
     legend: "always", // 凡例常表示
+    showInRangeSelector : true,
+    xlabel: "time_stamp [s]",
+    // showRangeSelector : true,
   });
   console.log(reader.result);
   console.log(typeof reader.result);
@@ -53,6 +55,7 @@ function load() {
 function set() {
   let lines = reader.result.split("\n");
   var data = "";
+  select_columns[0] = true; // time_stamp
   lines.forEach((line) => {
     var i = 0;
     line.split(",").forEach((cell) => {
@@ -64,6 +67,59 @@ function set() {
   g = new Dygraph(document.getElementById("graph"), data, {
     showRoller: true,
     legend: "always", // 凡例常表示
+    xlabel: "time_stamp [s]",
+    showInRangeSelector : true,
+    // showRangeSelector : true,
+  });
+}
+
+function set_pair() {
+  let lines = reader.result.split("\n");
+  var data = "";
+  var min = 100000.0;
+  var max = -100000.0;
+  var sel_data_num = 0;
+  var x_label = "";
+  var y_label = "";
+  select_columns[0] = false;
+  lines.forEach((line) => {
+    var i = 0;
+    line.split(",").forEach((cell) => {
+      if (select_columns[i] && sel_data_num < 2) {
+        var val = parseFloat(String(cell),10);
+        if (!isNaN(val)) {
+          min = Math.min(min, val);
+          max = Math.max(max, val);
+        }
+        else
+        {
+          if (x_label == "")
+            x_label = cell;
+          else
+            y_label = cell;
+        }
+        data += cell + ",";
+      }
+      i = i + 1;
+    });
+    if (select_columns[i])
+      sel_data_num = sel_data_num + 1;
+    data = data.slice(0, data.length - 1) + "\n";
+  });
+  console.log(x_label,y_label);
+  g = new Dygraph(document.getElementById("graph"), data, {
+    // showRoller: true,
+    // width: 800,
+    // height: 800,
+    dateWindow: [min, max],
+    valueRange: [min, max],
+    xlabel: x_label,
+    ylabel: y_label,
+    drawPoints: true,
+    drawAxesAtZero: true,
+    pointSize: 2.0,
+    rollPeriod: 1,
+    // legend: "always", // 凡例常表示
   });
 }
 
