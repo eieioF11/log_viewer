@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://dygraphs.com/1.1.1/dygraph-combined-dev.js"></script>
-    <script type='text/javascript' async src="js/script.js"></script>
+    <script type="text/javascript" async src="js/script.js"></script>
   </head>
   <body onload="init();">
     <div class="file-upload_area">
@@ -15,11 +15,18 @@
       <div class="box">
         <button class="buttonUnderline" onclick="load()">Reset</button>
         <button class="buttonUnderline" onclick="set()">Set</button>
-        <button class="buttonUnderline" onclick="set_pair()">Set pair</button>
+        <!-- <button class="buttonUnderline" onclick="set_pair()">Set pair</button> -->
       </div>
     </div>
     <div class="box">
-      <select multiple id="columns" onclick="return sel();"></select>
+      <div class="select_area">
+        <h2>x-axis</h2>
+        <select class="x_axis_sel" id="x-axis" onclick="return x_axis_sel();"></select>
+        <h2>y-axis</h2>
+        <select class="y_axis_sel" multiple id="y-axis" onclick="return y_axis_sel();"></select>
+      </div>
+      <!-- <select multiple id="x-axis" onclick="return x_axis_sel();"></select>
+      <select multiple id="y-axis" onclick="return y_axis_sel();"></select> -->
       <div class="graph_area" id="graph"></div>
     </div>
   </body>
